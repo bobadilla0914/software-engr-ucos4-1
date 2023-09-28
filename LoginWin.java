@@ -8,6 +8,17 @@ public class LoginWin extends JFrame {
     private JPasswordField passwordField;
     private int failedAttempts;
 
+    private Feature2 window2;
+    private void openFeature2() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                window2 = new Feature2();
+                window2.setVisible(true);
+            }
+        });
+    }
+    
     public LoginWin() {
         setTitle("Login");
         setSize(534, 284);
@@ -30,8 +41,7 @@ public class LoginWin extends JFrame {
         JButton loginButton = new JButton("Login");
         loginButton.setBounds(160, 183, 194, 29);
         loginButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        
-        
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,8 +49,8 @@ public class LoginWin extends JFrame {
                 char[] password = passwordField.getPassword();
 
                 if (username.equals("marcus") && String.valueOf(password).equals("president")) {
-                    JOptionPane.showMessageDialog(LoginWin.this, "Login successful!");
                     dispose();
+                    openFeature2();
                 } else {
                     failedAttempts++;
                     if (failedAttempts >= 3) {
@@ -55,6 +65,7 @@ public class LoginWin extends JFrame {
                 passwordField.setText("");
             }
         });
+
         panel.setLayout(null);
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -64,9 +75,7 @@ public class LoginWin extends JFrame {
         getContentPane().add(panel);
         setVisible(true);
     }
-    
-    
-    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
